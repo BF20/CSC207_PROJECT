@@ -1,0 +1,38 @@
+@startuml
+
++class Habit {
+__attributes__
++ String habit name
++ String emoji
++ int time_spent
++ public LocalDate day
+
+}
+
+
+
++class User {
+
+__attributes__
++String username;
++ArrayList<habit> userHabits;
+
+}
+
+
++class Group {
+
+__attributes__
+
++ArrayList<User> users;
++int group_score;
+
+}
+
+User --* Habit
+Group --* User
+
+
+
+
+@enduml
