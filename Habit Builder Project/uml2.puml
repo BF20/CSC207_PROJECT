@@ -41,9 +41,7 @@ __attributes__
 +class User {
 __attributes__
 +String username;
-+ExerciseHabit studyhabit
-+HobbyHabit hobbyhabit
-+StudyHabit studyhabit
++Map<Habit> Habits
 + bool admin
 
 }
@@ -53,7 +51,6 @@ __attributes__
 __attributes__
 +ArrayList<User> users;
 +int group_score;
-
 }
 
 
