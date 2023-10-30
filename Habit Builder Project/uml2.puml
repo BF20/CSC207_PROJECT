@@ -1,0 +1,88 @@
+@startuml
+
++abstract Habit {
+__attributes__
++ String habit name
++ String emoji
++ int time_spent
++ public LocalDate day
+
+}
+
++class ExerciseHabit {
+__attributes__
++ String habit name
++ String emoji
++ int time_spent
++ public LocalDate day
++ ArrayList<Session> sessions
+}
+
++class HobbyHabit {
+__attributes__
++ String habit name
++ String emoji
++ int time_spent
++ public LocalDate day
++ ArrayList<Session> sessions
+}
+
++class StudyHabit {
+__attributes__
++ String habit name
++ String emoji
++ int time_spent
++ public LocalDate day
++ ArrayList<Session> sessions
+}
+
+
+
++class User {
+__attributes__
++String username;
++Map<Habit> Habits
++ bool admin
+
+}
+
+
++class Group {
+__attributes__
++ArrayList<User> users;
++int group_score;
+}
+
+
+
+
+
+
+
++class Session {
+__atributes__
++int number_of_hours
++LocalDate date_and_time
+}
+
+Habit <|-- ExerciseHabit
+Habit <|-- StudyHabit
+Habit <|-- HobbyHabit
+
+
+Session *-- ExerciseHabit
+Session *-- StudyHabit
+Session *-- HobbyHabit
+
+User --* ExerciseHabit
+User --* HobbyHabit
+User --* StudyHabit
+Group --* User
+
+
+
+
+
+
+
+@enduml
