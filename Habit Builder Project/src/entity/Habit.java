@@ -1,5 +1,8 @@
 package entity;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 public class Habit {
 
@@ -9,19 +12,20 @@ public class Habit {
 
     int time_spent;
 
+    LocalDate day;
+
+    ArrayList<Session> session;
+}
+
+class StudyHabit extends Habit {
 
 }
 
-class study extends Habit {
-
-
-}
-
-class exercise extends Habit {
+class ExerciseHabit extends Habit {
 
 }
 
-class hobby extends Habit {
+class HobbyHabit extends Habit {
 
 }
 
