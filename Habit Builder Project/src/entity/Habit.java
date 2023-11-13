@@ -1,37 +1,37 @@
 package entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 
-public class Habit {
+public abstract class Habit {
 
     public String habit_name;
 
     public String emoji;
 
-    int time_spent;
+    public int time_spent;
 
-    LocalDate day;
+    public LocalDate creation_date;
 
-    ArrayList<Session> session;
-}
+    public LocalDate end_date;
 
-class StudyHabit extends Habit {
 
-}
-
-class ExerciseHabit extends Habit {
 
 }
 
-class HobbyHabit extends Habit {
+class study_habit extends Habit {
 
 }
 
-//Study
-//Exercise
-//Hobby
+class exercise_habit extends Habit {
+
+}
+
+class hobby_habit extends Habit {
+
+}
+
+
 
 
 

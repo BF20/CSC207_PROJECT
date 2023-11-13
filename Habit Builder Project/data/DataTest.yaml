@@ -1,0 +1,41 @@
+###YAML FILE
+#  username: Alice
+#  admin: false
+#  completed_habits: [
+#    {habit_name: Gym Time!, habit_type: exercise_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face},
+#    {habit_name: Study Time!, habit_type: study_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face}
+#    ]
+#
+#  active_habits: [
+#    {habit_name: Hobby Time!, habit_type: hobby_habit, habit_time: 4, day: LOCAL DATE 2023-12-15, emoji: happy_face}
+#  ]
+
+
+
+# users
+-
+  username: Alice
+  admin: false
+  completed_habits: [
+    {habit_name: Gym Time!, habit_type: exercise_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face},
+    {habit_name: Study Time!, habit_type: study_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face}
+  ]
+
+  active_habits: [
+    {habit_name: Hobby Time!, habit_type: hobby_habit, habit_time: 4, day: LOCAL DATE 2023-12-15, emoji: happy_face}
+  ]
+
+-
+  username: Bob
+  admin: false
+  completed_habits: [
+    { habit_name: Gym Time!, habit_type: exercise_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face },
+    { habit_name: Study Time!, habit_type: study_habit, habit_time: 4, day: LOCAL DATE 2002-12-14, emoji: happy_face }
+  ]
+
+  active_habits: [
+    { habit_name: Hobby Time!, habit_type: hobby_habit, habit_time: 4, day: LOCAL DATE 2022-12-15, emoji: happy_face }
+  ]
+
+
+
