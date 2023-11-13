@@ -10,5 +10,5 @@ public class User {
 
     private HashMap<String, Habit> habits = new HashMap<String, Habit>();
 
-
+    
 }
