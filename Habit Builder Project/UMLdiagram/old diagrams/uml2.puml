@@ -5,7 +5,7 @@ __attributes__
 + String habit name
 + String emoji
 + int time_spent
-+ public LocalDate day
++ LocalDate date
 
 }
 
@@ -14,7 +14,7 @@ __attributes__
 + String habit name
 + String emoji
 + int time_spent
-+ public LocalDate day
++ LocalDate date
 + ArrayList<Session> sessions
 }
 
@@ -23,7 +23,7 @@ __attributes__
 + String habit name
 + String emoji
 + int time_spent
-+ public LocalDate day
++ LocalDate date
 + ArrayList<Session> sessions
 }
 
@@ -32,7 +32,7 @@ __attributes__
 + String habit name
 + String emoji
 + int time_spent
-+ public LocalDate day
++ LocalDate date
 + ArrayList<Session> sessions
 }
 
@@ -62,7 +62,7 @@ __attributes__
 +class Session {
 __atributes__
 +int number_of_hours
-+LocalDate date_and_time
++LocalDate date
 }
 
 Habit <|-- ExerciseHabit
