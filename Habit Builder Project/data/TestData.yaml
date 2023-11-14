@@ -1,0 +1,16 @@
+- username: Bob
+  admin: false
+  completed_habits:
+  - {habit_type: study_habit, subject: Math, time_spent: 4.0, date: '2023-10-01'}
+  - {habit_type: study_habit, subject: History, time_spent: 2.0, date: '2023-10-07'}
+  - {habit_type: study_habit, subject: English, time_spent: 6.0, date: '2023-10-13'}
+- username: Alice
+  admin: false
+  completed_habits:
+  - {habit_type: study_habit, subject: Computer Science, time_spent: 3.0, date: '2023-10-03'}
+  - {habit_type: study_habit, subject: Financial Literacy, time_spent: 1.0, date: '2023-10-09'}
+  - {habit_type: study_habit, subject: Economics, time_spent: 9.0, date: '2023-10-11'}
+- username: Charile
+  admin: false
+  completed_habits:
+  - {habit_type: study_habit, subject: Chemistry, time_spent: 2.0, date: '2023-10-01'}
