@@ -1,9 +1,13 @@
 package entity;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Map;
 
-public interface UserFactory {
+public class UserFactory implements UserFactoryInterface {
 
-    User create(String name, String password, LocalDateTime ltd);
+    @Override
+    public User create(String username, boolean admin,  ArrayList<Habit> completed_habits) {
+        return new User(username, admin, completed_habits);
+    }
+
 }
-
