@@ -8,38 +8,40 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-     
-        JFrame frame = new JFrame("User Screen Switch 1.0");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
 
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        JFrame application = new JFrame("User Screen Switch 1.0");
+        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        application.setSize(400, 300);
+
 
         CardLayout cardLayout = new CardLayout();
-        JPanel cardPanel = new JPanel(cardLayout);
+        JPanel views = new JPanel(cardLayout);
+
+        application.add(views, BorderLayout.CENTER);
 
         // Example user screens (panels)
         JPanel user1Panel = createUserPanel("User 1 Screen");
         JPanel user2Panel = createUserPanel("User 2 Screen");
         JPanel user3Panel = createUserPanel("User 3 Screen");
 
-        cardPanel.add(user1Panel, "User1");
-        cardPanel.add(user2Panel, "User2");
-        cardPanel.add(user3Panel, "User3");
+        views.add(user1Panel, "User1");
+        views.add(user2Panel, "User2");
+        views.add(user3Panel, "User3");
 
         // ViewManager setup
-        new ViewManager(cardPanel, cardLayout, viewManagerModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
 
-        // Buttons to switch views
+        // Buttons to switch views. Irrespective of view model right now
         JPanel buttonPanel = new JPanel();
         addButton(buttonPanel, "Switch to User 1", () -> viewManagerModel.setActiveView("User1"));
         addButton(buttonPanel, "Switch to User 2", () -> viewManagerModel.setActiveView("User2"));
         addButton(buttonPanel, "Switch to User 3", () -> viewManagerModel.setActiveView("User3"));
 
-        frame.add(cardPanel, BorderLayout.CENTER);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        frame.setVisible(true);
+        application.add(buttonPanel, BorderLayout.SOUTH);
+
+        application.setVisible(true);
     }
 
     private static JPanel createUserPanel(String text) {
