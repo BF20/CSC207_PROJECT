@@ -90,7 +90,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
     @Override
     public User get_user(String username) {
-        return users.get("username");
+        return users.get(username);
     }
 
     @Override
