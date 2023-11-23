@@ -17,14 +17,6 @@ class study extends Habit {
 
 }
 
-class exercise extends Habit {
-
-}
-
-class hobby extends Habit {
-
-}
-
 //Study
 //Exercise
 //Hobby
