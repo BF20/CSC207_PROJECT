@@ -6,6 +6,8 @@
   - {habit_type: study_habit, subject: English, time_spent: 6.0, date: '2023-10-13'}
   - {habit_type: study_habit, subject: Math, time_spent: 123.0, date: '2023-11-20'}
   - {habit_type: study_habit, subject: Math, time_spent: 8.0, date: '2023-11-20'}
+  - {habit_type: study_habit, subject: Math, time_spent: 1234.0, date: '2023-11-24'}
+  - {habit_type: study_habit, subject: Math, time_spent: 987.0, date: '2023-11-24'}
 - username: Alice
   admin: false
   completed_habits:

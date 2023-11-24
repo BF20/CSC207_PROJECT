@@ -44,7 +44,3 @@ public class Main {
         mainAppView.display();
     }
 }
-
-
-
-
