@@ -26,10 +26,10 @@ public class MainAppView {
         cardPanel = new JPanel(cardLayout);
 
         // Example user screens (panels)
-        cardPanel.add(createUserPanel("User 1 Screen"), "User1");
-        cardPanel.add(createUserPanel("User 2 Screen"), "User2");
-        cardPanel.add(createUserPanel("User 3 Screen"), "User3");
-        
+//        cardPanel.add(createUserPanel("User 1 Screen"), "User1");
+//        cardPanel.add(createUserPanel("User 2 Screen"), "User2");
+//        cardPanel.add(createUserPanel("User 3 Screen"), "User3");
+
 
         buttonPanel = new JPanel();
     }

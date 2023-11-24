@@ -27,7 +27,7 @@ public class Main {
         }
         LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject);
 
-        // Example subjects for each user
+        // Instantiates initial users with example subjects
         mainAppView.addUserHabitLoggingPanel("Bob", logHabitInteractor, "Math");
         mainAppView.addUserHabitLoggingPanel("User2", logHabitInteractor, "Science");
         mainAppView.addUserHabitLoggingPanel("User3", logHabitInteractor, "History");
