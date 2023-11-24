@@ -1,0 +1,100 @@
+@startuml
+
++class Group {
+__attributes__
+-Map<String, Users> users;
+-int group_score;
+__methods__
++void AddUser(User user);
++User GetUser(String username);
++Map<String, Users> GetAllUsers();
+}
+
++class User {
+__attributes__
+- String username;
+- bool admin
+-ArrayList<Habit> completed_habits
+-Map<String Habit> active_habits
+__methods__
++ void AddHabit(Habit habit);
+"""add a habit to active_habits"""
++ void UpdateState();
+"""Put completed habits in completed_habits"""
++ ArrayList<Habit> GetAllCompletedHabits();
+"""gets all the completed habits"""
++Habit GetActiveHabit(String habit_name);
+"""gets the habit with the given name"""
++Map<String habits> getAllActiveHabits();
+"""gets all the active habits"""
+
++ boolean GetAdminStatus();
++ void SetAdminStatus(boolean status);
++ String GetUsername();
+
+
+}
+
+
++class ExerciseHabit {
+__attributes__
++ String habit_name
++ String emoji
++ int time_spent
++ LocalDate creation_date
++ LocalDate end_date
+}
+
++class HobbyHabit {
+__attributes__
++ String habit_name
++ String emoji
++ int time_spent
++ LocalDate creation_date
++ LocalDate end_date
+}
+
++class StudyHabit {
+__attributes__
++ String habit_name
++ String emoji
++ int time_spent
++ LocalDate creation_date
++ LocalDate end_date
+}
+
+
++abstract Habit {
+__attributes__
++ String habit_name
++ String emoji
++ int time_spent
++ LocalDate creation_date
++ LocalDate end_date
+
+}
+
+
+Group --* User
+
+
+User --* ExerciseHabit
+User --* HobbyHabit
+User --* StudyHabit
+
+
+ExerciseHabit --|> Habit
+StudyHabit --|> Habit
+HobbyHabit --|> Habit
+
+
+
+
+
+
+
+
+
+
+
+@enduml
