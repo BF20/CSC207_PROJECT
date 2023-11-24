@@ -1,33 +1,18 @@
 package entity;
 
-
-public class Habit {
-
-    public String habit_name;
-
-    public String emoji;
-
-    int time_spent;
+import java.time.LocalDate;
 
 
-}
+public abstract class Habit {
 
-class study extends Habit {
 
+    public double time_spent;
+
+    public LocalDate date;
 
 }
 
-class exercise extends Habit {
 
-}
-
-class hobby extends Habit {
-
-}
-
-//Study
-//Exercise
-//Hobby
 
 
 
