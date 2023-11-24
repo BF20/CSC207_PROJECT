@@ -27,7 +27,6 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
         YAML_File = new File(YAML_Path);
 
 
-
         if (YAML_File.length() == 0) {
             save();
         } else {
@@ -43,7 +42,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                 // we will cast later.
                 List<Map<String, Object>> data = yaml.load(input);
 
-                for (Map<String, Object> user: data) {
+                for (Map<String, Object> user : data) {
                     // Putting this data into the "user" class
                     String username = (String) user.get("username");
                     boolean admin = (Boolean) user.get("admin");
@@ -53,7 +52,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                     ArrayList<Habit> completed_habits_unpacked = new ArrayList<>();
 
                     // Putting all the habits into "completed habits"
-                    for (Map<String, Object> habit: completed_habits) {
+                    for (Map<String, Object> habit : completed_habits) {
                         String habit_type = (String) habit.get("habit_type");
                         double time_spent = (double) habit.get("time_spent");
                         LocalDate date = LocalDate.parse((String) habit.get("date"));
@@ -63,9 +62,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                         if (Objects.equals(habit_type, "study_habit")) {
                             study_habit constructed_habit = studyHabitFactory.create(time_spent, date, subject);
                             completed_habits_unpacked.add(constructed_habit);
-                        }
-
-                        else {
+                        } else {
                             throw new Exception("Habit type specified in YAML file not supported!");
 
                         }
@@ -90,7 +87,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
     @Override
     public User get_user(String username) {
-        return users.get("username");
+        return users.get(username);
     }
 
     @Override
@@ -104,7 +101,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
         List<Object> data = new ArrayList<>();
 
-        for (User user: this.users.values()) {
+        for (User user : this.users.values()) {
             Map<String, Object> user_map = new LinkedHashMap<>();
 
 
@@ -112,7 +109,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
             ArrayList<Habit> habits = user.GetAllCompletedHabits();
 
-            for (Habit habit:habits) {
+            for (Habit habit : habits) {
                 Map<String, Object> habit_map = new LinkedHashMap<>();
 
                 if (habit.getClass() == study_habit.class) {
