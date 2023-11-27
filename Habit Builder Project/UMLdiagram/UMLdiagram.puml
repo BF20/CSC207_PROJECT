@@ -1,0 +1,75 @@
+@startuml
+
++class Group {
+__attributes__
+-Map<String, Users> users;
+-int group_score;
+__methods__
++void AddUser(User user);
++User GetUser(String username);
++Map<String, Users> GetAllUsers();
+}
+
++class User {
+__attributes__
+- String username;
+- bool admin
+-ArrayList<Habit> completed_habits
+__methods__
+User(String username, boolean admin, ArrayList<Habit> completed_habits)
+"""constructor"""
++ void AddHabit(Habit habit);
+"""add a habit to completed_habits"""
++ ArrayList<Habit> GetAllCompletedHabits();
+"""gets all the completed habits"""
++ boolean GetAdminStatus();
++ void SetAdminStatus(boolean status);
++ String GetUsername();
+
+
+}
+
+
+
+
++class StudyHabit {
+__attributes__
++ double time_spent
++ LocalDate date
++ String subject
+__methods__
+study_habit(double time_spent, LocalDate date, String subject)
+"""constructor"""
+}
+
+
++abstract Habit {
+__attributes__
++ double time_spent
++ LocalDate date
+
+}
+
+
+Group --* User
+
+
+
+User --* StudyHabit
+
+
+
+StudyHabit --|> Habit
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
