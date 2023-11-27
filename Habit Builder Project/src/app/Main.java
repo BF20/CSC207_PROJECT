@@ -2,6 +2,7 @@ package app;
 
 import entity.StudyHabitFactory;
 import entity.UserFactory;
+import interface_adapter.log_habit.LogHabitController;
 import view.MainAppView;
 import view.ViewManager;
 import view.ViewManagerModel;
@@ -25,12 +26,15 @@ public class Main {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+//        This is effectively the LogHabitUseCase Factory
         LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject);
+        LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
 
         // Instantiates initial users with example subjects
-        mainAppView.addUserHabitLoggingPanel("Bob", logHabitInteractor, "Math");
-        mainAppView.addUserHabitLoggingPanel("User2", logHabitInteractor, "Science");
-        mainAppView.addUserHabitLoggingPanel("User3", logHabitInteractor, "History");
+        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "Math");
+        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "Science");
+        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "History");
 
 
         // Set up ViewManager with the card panel and layout from MainAppView

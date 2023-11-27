@@ -1,6 +1,7 @@
 package view;
 
 import use_case.log_habit.LogHabitInteractor;
+import interface_adapter.log_habit.LogHabitController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,18 +35,22 @@ public class MainAppView {
         buttonPanel = new JPanel();
     }
 
-    public void addUserHabitLoggingPanel(String username, LogHabitInteractor logHabitInteractor, String subject) {
+    public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject) {
         JPanel userPanel = new JPanel();
         userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
 
         JLabel subjectLabel = new JLabel("Subject: " + subject);
         JTextField hoursField = new JTextField(10);
+        Dimension maximumSize = new Dimension(Integer.MAX_VALUE, 50);
+        hoursField.setMaximumSize(maximumSize);
+
         JButton submitButton = new JButton("Log Hours");
 
         submitButton.addActionListener(e -> {
             try {
                 double hours = Double.parseDouble(hoursField.getText());
-                logHabitInteractor.LogHabit(username, hours, LocalDate.now(), subject);
+
+                logHabitController.LogHabit(username, hours, LocalDate.now(), subject);
                 JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
