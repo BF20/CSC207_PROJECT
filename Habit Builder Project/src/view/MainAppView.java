@@ -35,30 +35,9 @@ public class MainAppView {
     }
 
     public void addUserHabitLoggingPanel(String username, LogHabitInteractor logHabitInteractor, String subject) {
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
-
-        JLabel subjectLabel = new JLabel("Subject: " + subject);
-        JTextField hoursField = new JTextField(10);
-        JButton submitButton = new JButton("Log Hours");
-
-        submitButton.addActionListener(e -> {
-            try {
-                double hours = Double.parseDouble(hoursField.getText());
-                logHabitInteractor.LogHabit(username, hours, LocalDate.now(), subject);
-                JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, "Error logging hours: " + ex.getMessage());
-            }
-        });
-
-        userPanel.add(subjectLabel);
-        userPanel.add(hoursField);
-        userPanel.add(submitButton);
-        cardPanel.add(userPanel, username);
+        GroupGoalView.addGroupGoal(username, logHabitInteractor, subject, frame, cardPanel);
     }
+
 
     public void addSwitchButton(String buttonText, Runnable action) {
         JButton button = new JButton(buttonText);
