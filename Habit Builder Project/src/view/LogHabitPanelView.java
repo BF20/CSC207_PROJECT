@@ -6,15 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class UserHabitLoggingPanelView extends JPanel {
-    private final HabitLoggingViewModel viewModel;
+public class LogHabitPanelView extends JPanel {
+    private final LogHabitViewModel viewModel;
     private final JFrame frame;
     private final String username;
     private final String subject;
 
     private final LogHabitController logHabitController;
 
-    public UserHabitLoggingPanelView(String username, String subject, LogHabitController logHabitController, HabitLoggingViewModel viewModel, JFrame frame) {
+    public LogHabitPanelView(String username, String subject, LogHabitController logHabitController, LogHabitViewModel viewModel, JFrame frame) {
         this.username = username;
         this.subject = subject;
         this.viewModel = viewModel;

@@ -3,12 +3,12 @@ package view;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class HabitLoggingViewModel {
+public class LogHabitViewModel {
     private double hours;
     private String message;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public HabitLoggingViewModel() {
+    public LogHabitViewModel() {
     }
 
     public double getHours() {
