@@ -10,15 +10,6 @@ public abstract class Habit {
 
     public LocalDate date;
 
-
-
-
-
-
-
-
-
-
 }
 
 

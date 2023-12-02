@@ -8,9 +8,14 @@ import java.util.*;
 
 import entity.*;
 import org.yaml.snakeyaml.Yaml;
+import use_case.log_habit.LogHabitDataAccessInterface;
 import use_case.mainwindow.MainWindowDataAccessInterface;
 
-public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
+/**
+ * This class is a data access object (DAO) that handles user data storage and retrieval using a YAML file.
+ * It implements both LogHabitDataAccessInterface and MainWindowDataAccessInterface, providing necessary operations for user management.
+ */
+public class FileUserDataAccessObject implements MainWindowDataAccessInterface, LogHabitDataAccessInterface {
 
     private final File YAML_File;
 
@@ -20,12 +25,19 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
     private StudyHabitFactory studyHabitFactory;
 
+    /**
+     * Constructs a new FileUserDataAccessObject with the specified path for the YAML file and factories for user and study habit creation.
+     *
+     * @param YAML_Path         the path to the YAML file used for data storage
+     * @param userFactory       the factory for creating User objects
+     * @param studyHabitFactory the factory for creating StudyHabit objects
+     * @throws Exception if there is an error in reading or writing to the YAML file
+     */
     public FileUserDataAccessObject(String YAML_Path, UserFactory userFactory, StudyHabitFactory studyHabitFactory) throws Exception {
         this.userFactory = userFactory;
         this.studyHabitFactory = studyHabitFactory;
 
         YAML_File = new File(YAML_Path);
-
 
 
         if (YAML_File.length() == 0) {
@@ -43,7 +55,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                 // we will cast later.
                 List<Map<String, Object>> data = yaml.load(input);
 
-                for (Map<String, Object> user: data) {
+                for (Map<String, Object> user : data) {
                     // Putting this data into the "user" class
                     String username = (String) user.get("username");
                     boolean admin = (Boolean) user.get("admin");
@@ -53,7 +65,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                     ArrayList<Habit> completed_habits_unpacked = new ArrayList<>();
 
                     // Putting all the habits into "completed habits"
-                    for (Map<String, Object> habit: completed_habits) {
+                    for (Map<String, Object> habit : completed_habits) {
                         String habit_type = (String) habit.get("habit_type");
                         double time_spent = (double) habit.get("time_spent");
                         LocalDate date = LocalDate.parse((String) habit.get("date"));
@@ -63,9 +75,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
                         if (Objects.equals(habit_type, "study_habit")) {
                             study_habit constructed_habit = studyHabitFactory.create(time_spent, date, subject);
                             completed_habits_unpacked.add(constructed_habit);
-                        }
-
-                        else {
+                        } else {
                             throw new Exception("Habit type specified in YAML file not supported!");
 
                         }
@@ -104,7 +114,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
         List<Object> data = new ArrayList<>();
 
-        for (User user: this.users.values()) {
+        for (User user : this.users.values()) {
             Map<String, Object> user_map = new LinkedHashMap<>();
 
 
@@ -112,7 +122,7 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
 
             ArrayList<Habit> habits = user.GetAllCompletedHabits();
 
-            for (Habit habit:habits) {
+            for (Habit habit : habits) {
                 Map<String, Object> habit_map = new LinkedHashMap<>();
 
                 if (habit.getClass() == study_habit.class) {

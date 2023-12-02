@@ -4,6 +4,18 @@
   - {habit_type: study_habit, subject: Math, time_spent: 4.0, date: '2023-10-01'}
   - {habit_type: study_habit, subject: History, time_spent: 2.0, date: '2023-10-07'}
   - {habit_type: study_habit, subject: English, time_spent: 6.0, date: '2023-10-13'}
+  - {habit_type: study_habit, subject: Math, time_spent: 123.0, date: '2023-11-20'}
+  - {habit_type: study_habit, subject: Math, time_spent: 8.0, date: '2023-11-20'}
+  - {habit_type: study_habit, subject: Math, time_spent: 1234.0, date: '2023-11-24'}
+  - {habit_type: study_habit, subject: Math, time_spent: 987.0, date: '2023-11-24'}
+  - {habit_type: study_habit, subject: Math, time_spent: 234.0, date: '2023-11-24'}
+  - {habit_type: study_habit, subject: Math, time_spent: 11.0, date: '2023-11-27'}
+  - {habit_type: study_habit, subject: Math, time_spent: 22.0, date: '2023-11-27'}
+  - {habit_type: study_habit, subject: Math, time_spent: 456.0, date: '2023-11-27'}
+  - {habit_type: study_habit, subject: Math, time_spent: 432.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 987.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 789.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 45.0, date: '2023-12-02'}
 - username: Alice
   admin: false
   completed_habits:
