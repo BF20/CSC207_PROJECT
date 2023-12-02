@@ -8,9 +8,10 @@ import java.util.*;
 
 import entity.*;
 import org.yaml.snakeyaml.Yaml;
+import use_case.log_habit.LogHabitDataAccessInterface;
 import use_case.mainwindow.MainWindowDataAccessInterface;
 
-public class FileUserDataAccessObject implements MainWindowDataAccessInterface {
+public class FileUserDataAccessObject implements MainWindowDataAccessInterface, LogHabitDataAccessInterface {
 
     private final File YAML_File;
 
