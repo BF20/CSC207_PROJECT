@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 
+/**
+ * A panel view for logging habits. This view includes UI components
+ * for inputting the number of hours spent on a habit and for triggering the log action.
+ */
 public class LogHabitPanelView extends JPanel {
     private final LogHabitViewModel viewModel;
     private final JFrame frame;
@@ -14,6 +18,15 @@ public class LogHabitPanelView extends JPanel {
 
     private final LogHabitController logHabitController;
 
+    /**
+     * Constructs a new LogHabitPanelView with necessary dependencies.
+     *
+     * @param username           The username of the user logging the habit.
+     * @param subject            The subject or name of the habit.
+     * @param logHabitController The controller handling the log habit actions.
+     * @param viewModel          The view model associated with this view.
+     * @param frame              The parent frame for displaying dialogs.
+     */
     public LogHabitPanelView(String username, String subject, LogHabitController logHabitController, LogHabitViewModel viewModel, JFrame frame) {
         this.username = username;
         this.subject = subject;
@@ -29,6 +42,9 @@ public class LogHabitPanelView extends JPanel {
         });
     }
 
+    /**
+     * Initializes the components of this panel.
+     */
     private void initializeComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -45,6 +61,11 @@ public class LogHabitPanelView extends JPanel {
         add(submitButton);
     }
 
+    /**
+     * Handles the logic for logging hours for a habit.
+     *
+     * @param hoursField The text field containing the number of hours to log.
+     */
     private void logHours(JTextField hoursField) {
         try {
             double hours = Double.parseDouble(hoursField.getText());
