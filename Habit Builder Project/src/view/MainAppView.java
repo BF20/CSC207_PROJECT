@@ -1,6 +1,8 @@
 package view;
 
 import interface_adapter.log_habit.LogHabitController;
+import interface_adapter.log_habit.LogHabitPanelView;
+import interface_adapter.log_habit.LogHabitViewModel;
 
 import javax.swing.*;
 import java.awt.*;
