@@ -1,1 +1,1 @@
-const Charile_time_spent = [2.0];
+const Charile_time_spent = [];
