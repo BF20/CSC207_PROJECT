@@ -34,7 +34,13 @@ public class MainAppView {
     }
 
     public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject) {
-        UserHabitLoggingPanelView userPanel = new UserHabitLoggingPanelView(username, logHabitController, subject, frame);
+        // Create an instance of the ViewModel
+        HabitLoggingViewModel viewModel = new HabitLoggingViewModel();
+
+        // Create the user habit logging panel view with the ViewModel
+        UserHabitLoggingPanelView userPanel = new UserHabitLoggingPanelView(username, subject, logHabitController, viewModel, frame);
+
+        // Add the panel to your card layout
         cardPanel.add(userPanel, username);
     }
 

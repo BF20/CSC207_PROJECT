@@ -7,22 +7,29 @@ import java.awt.*;
 import java.time.LocalDate;
 
 public class UserHabitLoggingPanelView extends JPanel {
-    private final LogHabitController logHabitController;
-    private final String username;
+    private final HabitLoggingViewModel viewModel;
     private final JFrame frame;
-
+    private final String username;
     private final String subject;
 
-    public UserHabitLoggingPanelView(String username, LogHabitController logHabitController, String subject, JFrame frame) {
-        this.logHabitController = logHabitController;
-        this.username = username;
-        this.frame = frame;
-        this.subject = subject;
-        initializeComponents(subject);
+    private final LogHabitController logHabitController;
 
+    public UserHabitLoggingPanelView(String username, String subject, LogHabitController logHabitController, HabitLoggingViewModel viewModel, JFrame frame) {
+        this.username = username;
+        this.subject = subject;
+        this.viewModel = viewModel;
+        this.frame = frame;
+        this.logHabitController = logHabitController;
+        initializeComponents();
+
+        viewModel.addPropertyChangeListener(evt -> {
+            if ("message".equals(evt.getPropertyName())) {
+                JOptionPane.showMessageDialog(frame, evt.getNewValue().toString());
+            }
+        });
     }
 
-    private void initializeComponents(String subject) {
+    private void initializeComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel subjectLabel = new JLabel("Subject: " + subject);
@@ -41,8 +48,12 @@ public class UserHabitLoggingPanelView extends JPanel {
     private void logHours(JTextField hoursField) {
         try {
             double hours = Double.parseDouble(hoursField.getText());
+            viewModel.setHours(hours);
             logHabitController.LogHabit(username, hours, LocalDate.now(), subject);
-            JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
+
+//            Put this in the presenter
+//            JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
+            viewModel.logHabit(username, subject);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
         } catch (Exception ex) {
@@ -50,4 +61,5 @@ public class UserHabitLoggingPanelView extends JPanel {
         }
     }
 }
+
 
