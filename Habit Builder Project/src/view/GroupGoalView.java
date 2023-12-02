@@ -1,57 +1,56 @@
 package view;
-
-import use_case.log_habit.LogHabitInteractor;
+import interface_adapter.GroupGoal.GroupGoalController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
 
-public class GroupGoalView {
-    private JFrame frame;
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
-    private JPanel buttonPanel;
+public class GroupGoalView extends JPanel {
+    private final GroupGoalController groupGoalController;
+    private JTextField goalField;
+    private JLabel currentGoalLabel;
 
-    public GroupGoalView () {
+    public GroupGoalView(GroupGoalController groupGoalController) {
+        this.groupGoalController = groupGoalController;
         initializeComponents();
     }
 
     private void initializeComponents() {
-        frame = new JFrame("User Screen Switcher");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout);
-        buttonPanel = new JPanel();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // Input field for setting the goal
+        goalField = new JTextField(10);
+        goalField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+
+        // Button to set the goal
+        JButton setGoalButton = new JButton("Set Goal");
+        setGoalButton.addActionListener(e -> setGroupGoal());
+
+        // Label to display the current goal
+        currentGoalLabel = new JLabel("Current Group Goal: ");
+
+        this.add(new JLabel("Set Group Study Goal (in hours):"));
+        this.add(goalField);
+        this.add(setGoalButton);
+        this.add(currentGoalLabel);
     }
-    public void addUserHabitLoggingPanel(String username, LogHabitInteractor logHabitInteractor, String subject) {
-        addGroupGoal(username, logHabitInteractor, subject, frame, cardPanel);
+
+    private void setGroupGoal() {
+        try {
+            int goalHours = Integer.parseInt(goalField.getText());
+            groupGoalController.setGroupGoal(goalHours);
+            updateCurrentGoalLabel();
+            JOptionPane.showMessageDialog(this, "Group goal set successfully!");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for hours.");
+        }
     }
 
-    static void addGroupGoal(String username, LogHabitInteractor logHabitInteractor, String subject, JFrame frame, JPanel cardPanel) {
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
+    // Part of the GroupGoalPanel class
 
-        JLabel subjectLabel = new JLabel("Subject: " + subject);
-        JTextField hoursField = new JTextField(10);
-        JButton submitButton = new JButton("Log Hours");
-
-        submitButton.addActionListener(e -> {
-            try {
-                double hours = Double.parseDouble(hoursField.getText());
-                logHabitInteractor.LogHabit(username, hours, LocalDate.now(), subject);
-                JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, "Error logging hours: " + ex.getMessage());
-            }
-        });
-
-        userPanel.add(subjectLabel);
-        userPanel.add(hoursField);
-        userPanel.add(submitButton);
-        cardPanel.add(userPanel, username);
+    public void updateCurrentGoalLabel() {
+        // Fetch the current goal from the controller, which in turn gets it from the ViewModel
+        int currentGoal = groupGoalController.getGroupGoal();
+        currentGoalLabel.setText("Current Group Goal: " + currentGoal);
     }
+}
 
 
