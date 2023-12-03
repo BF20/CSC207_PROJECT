@@ -18,6 +18,7 @@
   - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-02'}
   - {habit_type: study_habit, subject: Math, time_spent: 3.0, date: '2023-12-02'}
   - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-03'}
 - username: Alice
   admin: false
   completed_habits:
