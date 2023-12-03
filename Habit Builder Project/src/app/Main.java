@@ -63,15 +63,19 @@ public class Main {
 
         // Then add the GroupGoalView and its button
         mainAppView.addGroupGoalView(groupGoalController);
+        //mainAppView.addGroupGoalButton();
 
         // Add buttons to switch between all views
         mainAppView.addSwitchButton("Switch to Bob", "Bob");
         mainAppView.addSwitchButton("Switch to User 2", "User2");
         mainAppView.addSwitchButton("Switch to User 3", "User3");
-        mainAppView.addSwitchButton("Set Group Goal", "GroupGoal");
+        //mainAppView.addSwitchButton("Set Group Goal", "GroupGoal");
 
         // Initialize ViewManager after all panels and buttons have been added
         new ViewManager(mainAppView.getCardPanel(), mainAppView.getCardLayout(), viewManagerModel);
+
+        // Specify initial view
+        mainAppView.getCardLayout().show(mainAppView.getCardPanel(), "Bob");
 
         mainAppView.display();
     }}
