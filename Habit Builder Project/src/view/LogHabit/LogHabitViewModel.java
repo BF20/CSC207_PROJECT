@@ -1,6 +1,4 @@
-package interface_adapter.log_habit;
-
-import view.LogHabitState;
+package view.LogHabit;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -10,14 +8,14 @@ import java.beans.PropertyChangeSupport;
  * and communicates changes in the state to the view.
  */
 public class LogHabitViewModel {
-    private view.LogHabitState state;
+    private LogHabitState state;
     private final PropertyChangeSupport support;
 
     /**
      * Constructor initializing the view model with a new state and property change support.
      */
     public LogHabitViewModel() {
-        this.state = new view.LogHabitState();
+        this.state = new LogHabitState();
         this.support = new PropertyChangeSupport(this);
     }
 
@@ -76,6 +74,16 @@ public class LogHabitViewModel {
     public LogHabitState getState() {
         return state;
     }
+
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
+    }
+
+    public void resetInputField() {
+        support.firePropertyChange("resetInputField", false, true);
+    }
+
+
 }
 
 

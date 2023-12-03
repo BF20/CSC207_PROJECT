@@ -1,4 +1,4 @@
-package view;
+package view.LogHabit;
 
 /**
  * Represents the state of a habit logging action.

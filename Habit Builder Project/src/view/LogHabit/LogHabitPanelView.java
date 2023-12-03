@@ -1,4 +1,6 @@
-package interface_adapter.log_habit;
+package view.LogHabit;
+
+import interface_adapter.log_habit.LogHabitController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,8 @@ import java.time.LocalDate;
  * for inputting the number of hours spent on a habit and for triggering the log action.
  */
 public class LogHabitPanelView extends JPanel {
+
+    private JTextField hoursField;
     private final LogHabitViewModel viewModel;
     private final JFrame frame;
     private final String username;
@@ -31,11 +35,14 @@ public class LogHabitPanelView extends JPanel {
         this.viewModel = viewModel;
         this.frame = frame;
         this.logHabitController = logHabitController;
+        this.hoursField = new JTextField(10);
         initializeComponents();
 
         viewModel.addPropertyChangeListener(evt -> {
             if ("message".equals(evt.getPropertyName())) {
                 JOptionPane.showMessageDialog(frame, evt.getNewValue().toString());
+            } else if ("resetInputField".equals(evt.getPropertyName())) {
+                hoursField.setText(""); // Reset the text field when the event is fired
             }
         });
     }
@@ -47,7 +54,10 @@ public class LogHabitPanelView extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel subjectLabel = new JLabel("Subject: " + subject);
-        JTextField hoursField = new JTextField(10);
+
+//        Picture of graphed data goes here
+
+        JTextField hoursField = this.hoursField;
         Dimension maximumSize = new Dimension(Integer.MAX_VALUE, 50);
         hoursField.setMaximumSize(maximumSize);
 
