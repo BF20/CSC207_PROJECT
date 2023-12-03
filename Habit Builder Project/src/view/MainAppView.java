@@ -9,6 +9,7 @@ import java.awt.*;
 import java.time.LocalDate;
 
 public class MainAppView {
+    private final GroupGoalController groupGoalController;
     private JFrame frame;
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -17,6 +18,7 @@ public class MainAppView {
 
     public MainAppView(GroupGoalController groupGoalController) {
         // Added as a class field
+        this.groupGoalController = groupGoalController;
         initializeComponents();
         addGroupGoalView(groupGoalController);
         addGroupGoalButton();
@@ -26,7 +28,7 @@ public class MainAppView {
     private void initializeComponents() {
         frame = new JFrame("User Screen Switcher");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(800, 600);
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -73,11 +75,6 @@ public class MainAppView {
         cardPanel.add(userPanel, username);
     }
 
-    public void addSwitchButton(String buttonText, Runnable action) {
-        JButton button = new JButton(buttonText);
-        button.addActionListener(e -> action.run());
-        buttonPanel.add(button);
-    }
 
     public void display() {
         frame.add(cardPanel, BorderLayout.CENTER);
@@ -96,13 +93,18 @@ public class MainAppView {
         buttonPanel.add(groupGoalButton);
     }
 
-
-
     private JPanel createUserPanel(String text) {
         JPanel panel = new JPanel();
         panel.add(new JLabel(text));
         return panel;
     }
+
+    public void addSwitchButton(String buttonText, String cardName) {
+        JButton button = new JButton(buttonText);
+        button.addActionListener(e -> cardLayout.show(cardPanel, cardName));
+        buttonPanel.add(button);
+    }
+
 
     public JPanel getCardPanel() {
         return cardPanel;
