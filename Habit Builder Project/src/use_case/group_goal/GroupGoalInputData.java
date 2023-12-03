@@ -1,11 +1,13 @@
 package use_case.group_goal;
 
 public class GroupGoalInputData {
+    private final int goalHours;
 
-    private Integer hours;
-
-    public void SetGroupGoal(Integer hours){
-        this.hours = hours;
+    public GroupGoalInputData(int goalHours) {
+        this.goalHours = goalHours;
     }
-    Integer hours() {return hours;}
+
+    public int getGoalHours() {
+        return goalHours;
+    }
 }
