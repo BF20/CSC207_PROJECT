@@ -28,9 +28,15 @@ public class Main {
         LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject);
 
         // Instantiates initial users with example subjects
+<<<<<<< Updated upstream
         mainAppView.addUserHabitLoggingPanel("Bob", logHabitInteractor, "Math");
         mainAppView.addUserHabitLoggingPanel("User2", logHabitInteractor, "Science");
         mainAppView.addUserHabitLoggingPanel("User3", logHabitInteractor, "History");
+=======
+        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
+        mainAppView.addUserHabitLoggingPanel("Alice", logHabitController, "");
+        mainAppView.addUserHabitLoggingPanel("Charile", logHabitController, "");
+>>>>>>> Stashed changes
 
 
         // Set up ViewManager with the card panel and layout from MainAppView
@@ -38,8 +44,8 @@ public class Main {
 
         // Buttons to switch views
         mainAppView.addSwitchButton("Switch to Bob", () -> viewManagerModel.setActiveView("Bob"));
-        mainAppView.addSwitchButton("Switch to User 2", () -> viewManagerModel.setActiveView("User2"));
-        mainAppView.addSwitchButton("Switch to User 3", () -> viewManagerModel.setActiveView("User3"));
+        mainAppView.addSwitchButton("Switch to Alice", () -> viewManagerModel.setActiveView("Alice"));
+        mainAppView.addSwitchButton("Switch to Charile", () -> viewManagerModel.setActiveView("Charile"));
 
         mainAppView.display();
     }
