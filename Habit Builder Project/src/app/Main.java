@@ -32,9 +32,9 @@ public class Main {
         LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
 
         // Instantiates initial users with example subjects
-        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "Math");
-        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "Science");
-        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "History");
+        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
+        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "");
+        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "");
 
 
         // Set up ViewManager with the card panel and layout from MainAppView

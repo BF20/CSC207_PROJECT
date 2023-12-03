@@ -11,6 +11,10 @@ import org.yaml.snakeyaml.Yaml;
 import use_case.log_habit.LogHabitDataAccessInterface;
 import use_case.mainwindow.MainWindowDataAccessInterface;
 
+/**
+ * This class is a data access object (DAO) that handles user data storage and retrieval using a YAML file.
+ * It implements both LogHabitDataAccessInterface and MainWindowDataAccessInterface, providing necessary operations for user management.
+ */
 public class FileUserDataAccessObject implements MainWindowDataAccessInterface, LogHabitDataAccessInterface {
 
     private final File YAML_File;
@@ -21,6 +25,14 @@ public class FileUserDataAccessObject implements MainWindowDataAccessInterface, 
 
     private StudyHabitFactory studyHabitFactory;
 
+    /**
+     * Constructs a new FileUserDataAccessObject with the specified path for the YAML file and factories for user and study habit creation.
+     *
+     * @param YAML_Path         the path to the YAML file used for data storage
+     * @param userFactory       the factory for creating User objects
+     * @param studyHabitFactory the factory for creating StudyHabit objects
+     * @throws Exception if there is an error in reading or writing to the YAML file
+     */
     public FileUserDataAccessObject(String YAML_Path, UserFactory userFactory, StudyHabitFactory studyHabitFactory) throws Exception {
         this.userFactory = userFactory;
         this.studyHabitFactory = studyHabitFactory;
