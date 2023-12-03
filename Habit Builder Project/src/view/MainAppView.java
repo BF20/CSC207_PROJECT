@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.GroupGoal.GroupGoalController;
 import use_case.log_habit.LogHabitInteractor;
 import interface_adapter.log_habit.LogHabitController;
 
@@ -13,8 +14,12 @@ public class MainAppView {
     private CardLayout cardLayout;
     private JPanel buttonPanel;
 
-    public MainAppView() {
+
+    public MainAppView(GroupGoalController groupGoalController) {
+        // Added as a class field
         initializeComponents();
+        addGroupGoalView(groupGoalController);
+        addGroupGoalButton();
     }
 
     //    All the initialization stuff from the main file in the CA Engine example
@@ -26,6 +31,7 @@ public class MainAppView {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+
         // Example user screens (panels)
 //        cardPanel.add(createUserPanel("User 1 Screen"), "User1");
 //        cardPanel.add(createUserPanel("User 2 Screen"), "User2");
@@ -33,6 +39,8 @@ public class MainAppView {
 
 
         buttonPanel = new JPanel();
+        frame.add(cardPanel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject) {
@@ -76,6 +84,19 @@ public class MainAppView {
         frame.add(buttonPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
+
+    public void addGroupGoalView(GroupGoalController groupGoalController) {
+        GroupGoalView groupGoalView = new GroupGoalView(groupGoalController);
+        cardPanel.add(groupGoalView, "GroupGoal");
+    }
+
+    public void addGroupGoalButton() {
+        JButton groupGoalButton = new JButton("Set Group Goal");
+        groupGoalButton.addActionListener(e -> cardLayout.show(cardPanel, "GroupGoal"));
+        buttonPanel.add(groupGoalButton);
+    }
+
+
 
     private JPanel createUserPanel(String text) {
         JPanel panel = new JPanel();

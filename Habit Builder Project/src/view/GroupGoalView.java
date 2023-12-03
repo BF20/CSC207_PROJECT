@@ -44,7 +44,6 @@ public class GroupGoalView extends JPanel {
         }
     }
 
-    // Part of the GroupGoalPanel class
 
     public void updateCurrentGoalLabel() {
         // Fetch the current goal from the controller, which in turn gets it from the ViewModel
