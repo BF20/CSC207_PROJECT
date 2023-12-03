@@ -3,13 +3,17 @@ package app;
 import entity.StudyHabitFactory;
 import entity.UserFactory;
 import interface_adapter.log_habit.LogHabitController;
+import use_case.log_habit.LogHabitOutputBoundary;
+import view.LogHabit.LogHabitViewModel;
 import view.MainAppView;
 import view.ViewManager;
 import view.ViewManagerModel;
 import data_access.FileUserDataAccessObject;
 import use_case.log_habit.LogHabitInteractor;
+import interface_adapter.log_habit.LogHabitPresenter;
 
 import javax.swing.*;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -28,13 +32,19 @@ public class Main {
         }
 
 //        This is effectively the LogHabitUseCase Factory
-        LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject);
-        LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
-
         // Instantiates initial users with example subjects
-        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "");
+        for (String s : new String[]{"Bob", "Alice", "Charile"}) {
+            LogHabitViewModel logHabitViewModel = new LogHabitViewModel();
+            LogHabitOutputBoundary logHabitPresenter = new LogHabitPresenter(logHabitViewModel);
+            LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject, logHabitPresenter);
+            LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
+            mainAppView.addUserHabitLoggingPanel(s, logHabitController, "", logHabitViewModel);
+
+        }
+
+
+//        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "");
+//        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "");
 
 
         // Set up ViewManager with the card panel and layout from MainAppView

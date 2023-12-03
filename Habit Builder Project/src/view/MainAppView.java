@@ -1,6 +1,8 @@
 package view;
 
 import interface_adapter.log_habit.LogHabitController;
+import view.LogHabit.LogHabitPanelView;
+import view.LogHabit.LogHabitViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,9 +35,8 @@ public class MainAppView {
         buttonPanel = new JPanel();
     }
 
-    public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject) {
+    public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject, LogHabitViewModel viewModel) {
         // Create an instance of the ViewModel
-        LogHabitViewModel viewModel = new LogHabitViewModel();
 
         // Create the user habit logging panel view with the ViewModel
         LogHabitPanelView userPanel = new LogHabitPanelView(username, subject, logHabitController, viewModel, frame);
