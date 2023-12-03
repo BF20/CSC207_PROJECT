@@ -3,6 +3,8 @@ package app;
 import entity.StudyHabitFactory;
 import entity.UserFactory;
 import interface_adapter.log_habit.LogHabitController;
+import interface_adapter.log_habit.SwitchScreenController;
+import use_case.switch_screens.SwitchScreenInteractor;
 import view.MainAppView;
 import view.ViewManager;
 import view.ViewManagerModel;
@@ -31,19 +33,24 @@ public class Main {
         LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject);
         LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
 
+        // Make the SwitchScreen Controller
+        SwitchScreenInteractor switchScreenInteractor = new SwitchScreenInteractor(viewManagerModel);
+        SwitchScreenController switchScreenController = new SwitchScreenController(switchScreenInteractor);
+
         // Instantiates initial users with example subjects
-        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "");
+        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "None");
+        mainAppView.addUserHabitLoggingPanel("Alice", logHabitController, "None");
+        mainAppView.addUserHabitLoggingPanel("Charlie", logHabitController, "None");
 
 
         // Set up ViewManager with the card panel and layout from MainAppView
         new ViewManager(mainAppView.getCardPanel(), mainAppView.getCardLayout(), viewManagerModel);
 
         // Buttons to switch views
-        mainAppView.addSwitchButton("Switch to Bob", () -> viewManagerModel.setActiveView("Bob"));
-        mainAppView.addSwitchButton("Switch to User 2", () -> viewManagerModel.setActiveView("User2"));
-        mainAppView.addSwitchButton("Switch to User 3", () -> viewManagerModel.setActiveView("User3"));
+        // Take out second argument and plug in the controller
+        mainAppView.addSwitchButton("Switch to Bob", () -> switchScreenController.switchToUserScreen("Bob"));
+        mainAppView.addSwitchButton("Switch to Alice", () -> switchScreenController.switchToUserScreen("Alice"));
+        mainAppView.addSwitchButton("Switch to Charlie", () -> switchScreenController.switchToUserScreen("Charlie"));
 
         mainAppView.display();
     }
