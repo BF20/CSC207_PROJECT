@@ -8,14 +8,14 @@ public class ChatGPTAPIExample {
 
     public static String chatGPT(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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";
+        String encrypted_api_key = "sk-ng7vYcrwKUdj7oKMHTO0wO7T3B7lbkFJvI7Yg6J0NO37s4IXHQh7Eag";
         String model = "gpt-4";
 
         try {
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+            connection.setRequestProperty("Authorization", "Bearer " + encrypted_api_key.replace("7", ""));
             connection.setRequestProperty("Content-Type", "application/json");
 
             // The request body

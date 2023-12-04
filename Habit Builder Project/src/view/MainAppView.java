@@ -1,5 +1,9 @@
 package view;
 
+
+import interface_adapter.GroupGoal.GroupGoalController;
+import use_case.log_habit.LogHabitInteractor;
+
 import interface_adapter.log_habit.LogHabitController;
 import interface_adapter.words_of_affirmation.WOAController;
 import interface_adapter.words_of_affirmation.WOAPresenter;
@@ -23,26 +27,37 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class MainAppView {
+    private final GroupGoalController groupGoalController;
     private JFrame frame;
     private JPanel cardPanel;
     private CardLayout cardLayout;
     private JPanel buttonPanel;
 
+
     private String activeUsername;
 
-    public MainAppView() {
-        initializeComponents();
+
+
+
+
+    public MainAppView(GroupGoalController groupGoalController) {
+        // Added as a class field
         this.activeUsername = "Bob";
+        this.groupGoalController = groupGoalController;
+        initializeComponents();
+        addGroupGoalView(groupGoalController);
+        addGroupGoalButton();
     }
 
     //    All the initialization stuff from the main file in the CA Engine example
     private void initializeComponents() {
-        frame = new JFrame("User Screen Switcher");
+        frame = new JFrame("PROGRESS PAL");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(800, 600);
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+
 
         // Example user screens (panels)
 //        cardPanel.add(createUserPanel("User 1 Screen"), "User1");
@@ -51,6 +66,8 @@ public class MainAppView {
 
 
         buttonPanel = new JPanel();
+        frame.add(cardPanel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject, LogHabitViewModel viewModel) {
@@ -89,7 +106,7 @@ public class MainAppView {
                     // Convert the YAML data to a String
                     String yamlString = yaml.dump(data);
                     yamlString = StringCleaner.removeSpecialCharacters(yamlString);
-                    String message = activeUsername + " and their friends are trying to study more. Here is a log of their studying. Write some poetic and brief words of affirmation for " + activeUsername + " based on the data in the log " + "jah";
+                    String message = activeUsername + " and their friends are trying to study more. . Write some poetic, personalized and brief words of affirmation for " + activeUsername;
                     System.out.println(message);
 
                     toDisplay = ChatGPTAPIExample.chatGPT(message);
@@ -138,11 +155,31 @@ public class MainAppView {
         frame.setVisible(true);
     }
 
-//    private JPanel createUserPanel(String text) {
-//        JPanel panel = new JPanel();
-//        panel.add(new JLabel(text));
-//        return panel;
-//    }
+
+    public void addGroupGoalView(GroupGoalController groupGoalController) {
+        GroupGoalView groupGoalView = new GroupGoalView(groupGoalController);
+        cardPanel.add(groupGoalView, "GroupGoal");
+    }
+
+    public void addGroupGoalButton() {
+        JButton groupGoalButton = new JButton("Set Group Goal");
+        groupGoalButton.addActionListener(e -> cardLayout.show(cardPanel, "GroupGoal"));
+        buttonPanel.add(groupGoalButton);
+    }
+
+    private JPanel createUserPanel(String text) {
+        JPanel panel = new JPanel();
+        panel.add(new JLabel(text));
+        return panel;
+    }
+
+
+    public void addSwitchButton(String buttonText, String cardName) {
+        JButton button = new JButton(buttonText);
+        button.addActionListener(e -> cardLayout.show(cardPanel, cardName));
+        buttonPanel.add(button);
+    }
+
 
     public JPanel getCardPanel() {
         return cardPanel;

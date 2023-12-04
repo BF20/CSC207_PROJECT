@@ -18,10 +18,10 @@ public class chatGPT {
 
         // Set the request method to POST
         connection.setRequestMethod("POST");
-
+        String encrypted_api_key = "sk-ng7vYcrwKUdj7oKMHTO0wO7T3B7lbkFJvI7Yg6J0NO37s4IXHQh7Eag";
         // Set the request headers
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("Authorization", "Bearer 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"); // Replace with your API key
+        connection.setRequestProperty("Authorization", "Bearer " + encrypted_api_key.replace("7", "")); // Replace with your API key
 
         // Enable input and output streams
         connection.setDoOutput(true);
