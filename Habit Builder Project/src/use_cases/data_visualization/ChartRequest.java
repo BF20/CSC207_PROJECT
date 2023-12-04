@@ -58,6 +58,7 @@ public class ChartRequest {
         for (String value : values) {
             timeSpentList.add(Double.parseDouble(value.trim()));
         }
+        Collections.reverse(timeSpentList);
         return timeSpentList;
     }
 

@@ -1,1 +1,1 @@
-const Charile_habit_hours = [10, 5, 0, 0, 0, 0, 0];
+const Charile_habit_hours = [0, 0, 5, 0, 0, 0, 0];

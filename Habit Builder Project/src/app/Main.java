@@ -35,9 +35,9 @@ public class Main {
         // Instantiates initial users with example subjects
 
 
-        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("Alice", logHabitController, "");
-        mainAppView.addUserHabitLoggingPanel("Charile", logHabitController, "");
+//        mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "");
+//        mainAppView.addUserHabitLoggingPanel("Alice", logHabitController, "");
+//        mainAppView.addUserHabitLoggingPanel("Charile", logHabitController, "");
 
 
         for (String s : new String[]{"Bob", "Alice", "Charile"}) {

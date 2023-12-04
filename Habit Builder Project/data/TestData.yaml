@@ -31,6 +31,10 @@
   - {habit_type: study_habit, subject: Financial Literacy, time_spent: 1.0, date: '2023-10-09'}
   - {habit_type: study_habit, subject: Economics, time_spent: 9.0, date: '2023-10-11'}
   - {habit_type: study_habit, subject: '', time_spent: 3.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 10.0, date: '2023-12-03'}
+  - {habit_type: study_habit, subject: '', time_spent: 10.0, date: '2023-12-03'}
+  - {habit_type: study_habit, subject: '', time_spent: 20.0, date: '2023-12-04'}
+  - {habit_type: study_habit, subject: '', time_spent: 20.0, date: '2023-12-04'}
 - username: Charile
   admin: false
   completed_habits:

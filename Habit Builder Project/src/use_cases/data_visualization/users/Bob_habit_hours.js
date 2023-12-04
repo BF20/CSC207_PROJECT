@@ -1,1 +1,1 @@
-const Bob_habit_hours = [43, 5329, 0, 0, 0, 0, 489];
+const Bob_habit_hours = [0, 0, 5329, 0, 0, 0, 0];
