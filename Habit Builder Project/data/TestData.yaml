@@ -40,3 +40,4 @@
   completed_habits:
   - {habit_type: study_habit, subject: Chemistry, time_spent: 2.0, date: '2023-10-01'}
   - {habit_type: study_habit, subject: '', time_spent: 5.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 4.0, date: '2023-12-04'}
