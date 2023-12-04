@@ -20,6 +20,20 @@
   - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-02'}
   - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-03'}
   - {habit_type: study_habit, subject: Math, time_spent: 2.0, date: '2023-12-03'}
+  - {habit_type: study_habit, subject: Math, time_spent: 456.0, date: '2023-11-27'}
+  - {habit_type: study_habit, subject: Math, time_spent: 432.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 987.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 789.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 45.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 1234.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 1.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 1234.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 123.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 44.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 432.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 4.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 4.0, date: '2023-12-02'}
+  - {habit_type: study_habit, subject: '', time_spent: 543.0, date: '2023-12-03'}
 - username: Alice
   admin: false
   completed_habits:

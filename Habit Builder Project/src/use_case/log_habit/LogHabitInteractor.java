@@ -13,14 +13,16 @@ import entity.study_habit;
  */
 public class LogHabitInteractor implements LogHabitInputBoundary {
     private final LogHabitDataAccessInterface userDataAccessObject;
+    private final LogHabitOutputBoundary logHabitOutputBoundary;
 
     /**
      * Constructs a new LogHabitInteractor with the given data access object.
      *
      * @param userDataAccessObject the data access object for user operations
      */
-    public LogHabitInteractor(LogHabitDataAccessInterface userDataAccessObject) {
+    public LogHabitInteractor(LogHabitDataAccessInterface userDataAccessObject, LogHabitOutputBoundary logHabitOutputBoundary) {
         this.userDataAccessObject = userDataAccessObject;
+        this.logHabitOutputBoundary = logHabitOutputBoundary;
     }
 
 
@@ -38,7 +40,7 @@ public class LogHabitInteractor implements LogHabitInputBoundary {
             Habit newHabit = new study_habit(inputData.getHours(), inputData.getDate(), inputData.getSubject());
             user.AddHabit(newHabit);
             userDataAccessObject.save_user(user);
-
+            logHabitOutputBoundary.ResetInputNumber();
         } else {
             throw new Exception("User not found");
         }

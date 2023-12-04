@@ -1,12 +1,15 @@
 package view;
 
+
 import interface_adapter.GroupGoal.GroupGoalController;
 import use_case.log_habit.LogHabitInteractor;
+
 import interface_adapter.log_habit.LogHabitController;
+import view.LogHabit.LogHabitPanelView;
+import view.LogHabit.LogHabitViewModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
 
 public class MainAppView {
     private final GroupGoalController groupGoalController;
@@ -45,33 +48,13 @@ public class MainAppView {
         frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject) {
-        JPanel userPanel = new JPanel();
-        userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
+    public void addUserHabitLoggingPanel(String username, LogHabitController logHabitController, String subject, LogHabitViewModel viewModel) {
+        // Create an instance of the ViewModel
 
-        JLabel subjectLabel = new JLabel("Subject: " + subject);
-        JTextField hoursField = new JTextField(10);
-        Dimension maximumSize = new Dimension(Integer.MAX_VALUE, 50);
-        hoursField.setMaximumSize(maximumSize);
+        // Create the user habit logging panel view with the ViewModel
+        LogHabitPanelView userPanel = new LogHabitPanelView(username, subject, logHabitController, viewModel, frame);
 
-        JButton submitButton = new JButton("Log Hours");
-
-        submitButton.addActionListener(e -> {
-            try {
-                double hours = Double.parseDouble(hoursField.getText());
-
-                logHabitController.LogHabit(username, hours, LocalDate.now(), subject);
-                JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(frame, "Error logging hours: " + ex.getMessage());
-            }
-        });
-
-        userPanel.add(subjectLabel);
-        userPanel.add(hoursField);
-        userPanel.add(submitButton);
+        // Add the panel to your card layout
         cardPanel.add(userPanel, username);
     }
 
@@ -81,6 +64,7 @@ public class MainAppView {
         frame.add(buttonPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
+
 
     public void addGroupGoalView(GroupGoalController groupGoalController) {
         GroupGoalView groupGoalView = new GroupGoalView(groupGoalController);
@@ -98,6 +82,7 @@ public class MainAppView {
         panel.add(new JLabel(text));
         return panel;
     }
+
 
     public void addSwitchButton(String buttonText, String cardName) {
         JButton button = new JButton(buttonText);
