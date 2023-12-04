@@ -1,0 +1,1 @@
+const Alice_habit_hours = [20, 20, 3, 0, 0, 0, 0];
