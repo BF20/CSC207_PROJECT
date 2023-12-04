@@ -1,10 +1,15 @@
 package view.LogHabit;
 
 import interface_adapter.log_habit.LogHabitController;
-
+import use_cases.data_visualization.UserGraphPanel;
+import use_cases.data_visualization.UserJsDataTry;
+import use_cases.data_visualization.ChartRequest;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A panel view for logging habits. This view includes UI components
@@ -17,6 +22,7 @@ public class LogHabitPanelView extends JPanel {
     private final JFrame frame;
     private final String username;
     private final String subject;
+    private UserGraphPanel userGraphPanel;
 
     private final LogHabitController logHabitController;
 
@@ -56,6 +62,9 @@ public class LogHabitPanelView extends JPanel {
         JLabel subjectLabel = new JLabel("Subject: " + subject);
 
 //        Picture of graphed data goes here
+        JButton graphButton = new JButton("Update Graph");
+        graphButton.addActionListener(e -> updateGraph(e));
+        add(graphButton);
 
         JTextField hoursField = this.hoursField;
         Dimension maximumSize = new Dimension(Integer.MAX_VALUE, 50);
@@ -68,6 +77,82 @@ public class LogHabitPanelView extends JPanel {
         add(hoursField);
         add(submitButton);
     }
+
+
+
+
+    private void updateGraph(ActionEvent e) {
+        JButton updateGraphButton = (JButton) e.getSource();
+        updateGraphButton.setEnabled(false);
+
+        // Simple background task to avoid freezing the UI
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    // Read the JavaScript file for time spent data
+                    String timeSpentData = ChartRequest.readTimeSpentData(username);
+
+                    // Parse the time spent data into a list of doubles
+                    List<Double> timeSpentList = ChartRequest.parseTimeSpentData(timeSpentData);
+
+                    // Build the JSON for the chart
+                    String jsonPart = ChartRequest.buildChartJson(timeSpentList);
+
+                    // Encode the JSON part for URL usage
+                    String encodedJsonPart = ChartRequest.encodeChartJson(jsonPart);
+
+                    // Construct the chart URL
+                    String chartUrl = ChartRequest.constructChartUrl(encodedJsonPart);
+
+                    // Fetch and save the chart image
+                    ChartRequest.fetchAndSaveChartImage(username, chartUrl);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Handle completion of chart generation, such as updating the UI
+                updateUserGraphPanel();
+                updateGraphButton.setEnabled(true);
+            }
+        };
+        worker.execute();
+    }
+
+    private void updateUserGraphPanel() {
+        // Remove the old graph panel if present
+        if (userGraphPanel != null) {
+            remove(userGraphPanel);
+        }
+        // Create and add a new UserGraphPanel with the updated graph
+        userGraphPanel = new UserGraphPanel(Collections.singletonList(username));
+        add(userGraphPanel);
+        // Refresh the panel to display the new graph
+        revalidate();
+        repaint();
+    }
+
+
+
+    // Remove the existing graph panel
+//        if (userGraphPanel != null) {
+//            remove(userGraphPanel);
+//        }
+//
+//        // Recreate the user graph panel with the username(s)
+//        userGraphPanel = new UserGraphPanel(Collections.singletonList(this.username));
+//
+//        // Add the new graph panel
+//        add(userGraphPanel);
+//
+//        // Refresh the panel to display the new graph
+//        revalidate();
+//        repaint();
+
 
     /**
      * Handles the logic for logging hours for a habit.
@@ -83,6 +168,8 @@ public class LogHabitPanelView extends JPanel {
 //            Put this in the presenter
 //            JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
             viewModel.logHabit(username, subject);
+
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
         } catch (Exception ex) {
