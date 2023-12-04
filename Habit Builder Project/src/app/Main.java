@@ -42,19 +42,20 @@ public class Main {
 
         }
 
-
+        mainAppView.addAffirmationPanel();
 //        mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "");
 //        mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "");
+
 
 
         // Set up ViewManager with the card panel and layout from MainAppView
         new ViewManager(mainAppView.getCardPanel(), mainAppView.getCardLayout(), viewManagerModel);
 
         // Buttons to switch views
-        mainAppView.addSwitchButton("Switch to Bob", () -> viewManagerModel.setActiveView("Bob"));
-        mainAppView.addSwitchButton("Switch to User 2", () -> viewManagerModel.setActiveView("User2"));
-        mainAppView.addSwitchButton("Switch to User 3", () -> viewManagerModel.setActiveView("User3"));
-
+        mainAppView.addSwitchButton("Switch to Bob", () -> viewManagerModel.setActiveView("Bob"), "Bob");
+        mainAppView.addSwitchButton("Switch to User 2", () -> viewManagerModel.setActiveView("User2"), "User2");
+        mainAppView.addSwitchButton("Switch to User 3", () -> viewManagerModel.setActiveView("User3"), "User3");
+        mainAppView.addSwitchButton("Words of Affirmation", () -> viewManagerModel.setActiveView("AffirmationPanel"), "");
         mainAppView.display();
     }
 }
