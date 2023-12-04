@@ -38,6 +38,7 @@ public class Main {
             LogHabitOutputBoundary logHabitPresenter = new LogHabitPresenter(logHabitViewModel);
             LogHabitInteractor logHabitInteractor = new LogHabitInteractor(userDataAccessObject, logHabitPresenter);
             LogHabitController logHabitController = new LogHabitController(logHabitInteractor);
+//            Graph VM
             mainAppView.addUserHabitLoggingPanel(s, logHabitController, "", logHabitViewModel);
 
         }

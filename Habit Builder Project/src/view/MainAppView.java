@@ -19,7 +19,7 @@ public class MainAppView {
 
     //    All the initialization stuff from the main file in the CA Engine example
     private void initializeComponents() {
-        frame = new JFrame("User Screen Switcher");
+        frame = new JFrame("Progress Pal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
 
