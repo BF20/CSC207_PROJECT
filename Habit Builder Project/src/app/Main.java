@@ -60,6 +60,7 @@ public class Main {
         mainAppView.addUserHabitLoggingPanel("Bob", logHabitController, "Math");
         mainAppView.addUserHabitLoggingPanel("User2", logHabitController, "Science");
         mainAppView.addUserHabitLoggingPanel("User3", logHabitController, "History");
+        mainAppView.addUserHabitLoggingPanel("User4", logHabitController, "English");
 
         // Then add the GroupGoalView and its button
         mainAppView.addGroupGoalView(groupGoalController);
