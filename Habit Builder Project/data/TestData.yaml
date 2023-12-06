@@ -1,3 +1,6 @@
+- username: gg
+  admin: false
+  completed_habits: []
 - username: Bob
   admin: false
   completed_habits:
