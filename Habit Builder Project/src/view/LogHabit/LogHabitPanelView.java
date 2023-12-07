@@ -1,16 +1,18 @@
 package view.LogHabit;
 
 import interface_adapter.log_habit.LogHabitController;
-import view.LogHabit.LogHabitViewModel;
+import use_cases.data_visualization.ImageResizer;
+import use_cases.data_visualization.UserGraphPanel;
+import use_cases.data_visualization.ChartRequest;
+import use_cases.data_visualization.UserJsDataTryInteractor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
-/**
- * A panel view for logging habits. This view includes UI components
- * for inputting the number of hours spent on a habit and for triggering the log action.
- */
 public class LogHabitPanelView extends JPanel {
 
     private JTextField hoursField;
@@ -18,18 +20,11 @@ public class LogHabitPanelView extends JPanel {
     private final JFrame frame;
     private final String username;
     private final String subject;
+    private UserGraphPanel userGraphPanel;
+    private JButton updateGraphButton;
 
     private final LogHabitController logHabitController;
 
-    /**
-     * Constructs a new LogHabitPanelView with necessary dependencies.
-     *
-     * @param username           The username of the user logging the habit.
-     * @param subject            The subject or name of the habit.
-     * @param logHabitController The controller handling the log habit actions.
-     * @param viewModel          The view model associated with this view.
-     * @param frame              The parent frame for displaying dialogs.
-     */
     public LogHabitPanelView(String username, String subject, LogHabitController logHabitController, LogHabitViewModel viewModel, JFrame frame) {
         this.username = username;
         this.subject = subject;
@@ -43,25 +38,20 @@ public class LogHabitPanelView extends JPanel {
             if ("message".equals(evt.getPropertyName())) {
                 JOptionPane.showMessageDialog(frame, evt.getNewValue().toString());
             } else if ("resetInputField".equals(evt.getPropertyName())) {
-                hoursField.setText(""); // Reset the text field when the event is fired
+                hoursField.setText("");
             }
         });
     }
 
-    /**
-     * Initializes the components of this panel.
-     */
     private void initializeComponents() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         JLabel subjectLabel = new JLabel("Subject: " + subject);
 
-//        Picture of graphed data goes here
+        updateGraphButton = new JButton("Update Graph");
+        updateGraphButton.addActionListener(this::updateGraph);
+        add(updateGraphButton);
 
-        JTextField hoursField = this.hoursField;
-        Dimension maximumSize = new Dimension(Integer.MAX_VALUE, 50);
-        hoursField.setMaximumSize(maximumSize);
-
+        hoursField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         JButton submitButton = new JButton("Log Hours");
         submitButton.addActionListener(e -> logHours(hoursField));
 
@@ -70,20 +60,91 @@ public class LogHabitPanelView extends JPanel {
         add(submitButton);
     }
 
-    /**
-     * Handles the logic for logging hours for a habit.
-     *
-     * @param hoursField The text field containing the number of hours to log.
-     */
+    private void updateGraph(ActionEvent e) {
+        updateGraph();
+    }
+
+    private void updateGraph() {
+        updateGraphButton.setEnabled(false);
+
+
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            private String resizedImagePath;
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    UserJsDataTryInteractor.updateUserData();
+
+
+                    String timeSpentData = ChartRequest.readTimeSpentData(username);
+
+                    List<Double> timeSpentList = ChartRequest.parseTimeSpentData(timeSpentData);
+
+                    String jsonPart = ChartRequest.buildChartJson(timeSpentList);
+
+                    String encodedJsonPart = ChartRequest.encodeChartJson(jsonPart);
+
+                    String chartUrl = ChartRequest.constructChartUrl(encodedJsonPart);
+                   // String chartUrl = ChartRequest.constructChartUrl(encodedJsonPart);
+                    String imagePath = "Habit Builder Project/src/use_cases/data_visualization/graphs/" + username +"_chart.png"; // The path where the image is saved after fetching
+                    ChartRequest.fetchAndSaveChartImage(username, chartUrl);
+
+                     //Resize the image
+                    String resizedImagePath = "Habit Builder Project/src/use_cases/data_visualization/graphs/" ; // Path to save the resized image
+                    //resizedImagePath = "path/to/resized/image.png"; // Replace with actual path
+                    ImageResizer.resize(imagePath, resizedImagePath, 150, 75); // Resize image
+
+                    ChartRequest.fetchAndSaveChartImage(username, chartUrl);
+
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+//
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+
+                updateUserGraphPanel(resizedImagePath);
+                updateGraphButton.setEnabled(true);
+            }
+        };
+        worker.execute();
+    }
+
+    private void updateUserGraphPanel(String resizedImagePath) {
+        if (userGraphPanel != null) {
+            remove(userGraphPanel);
+        }
+        userGraphPanel = new UserGraphPanel(Collections.singletonList(username));
+        userGraphPanel.updateGraphImage(  "Habit Builder Project/src/use_cases/data_visualization/graphs/"+ username + "_chart.png");
+        add(userGraphPanel);
+        revalidate();
+        repaint();
+//        if (userGraphPanel != null) {
+//            remove(userGraphPanel);
+//        }
+//        userGraphPanel = new UserGraphPanel(Collections.singletonList(username));
+////        userGraphPanel.setPreferredSize(new Dimension(300, 150));
+//        add(userGraphPanel);
+//        revalidate();
+//        repaint();
+    }
+
     private void logHours(JTextField hoursField) {
         try {
             double hours = Double.parseDouble(hoursField.getText());
             viewModel.setHours(hours);
             logHabitController.LogHabit(username, hours, LocalDate.now(), subject);
-
-//            Put this in the presenter
-//            JOptionPane.showMessageDialog(frame, "Hours logged successfully!");
             viewModel.logHabit(username, subject);
+
+
+            updateGraph();
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Please enter a valid number for hours.");
         } catch (Exception ex) {
