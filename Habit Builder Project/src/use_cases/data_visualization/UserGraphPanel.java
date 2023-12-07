@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserGraphPanel extends JPanel {
+    private JLabel graphLabel;
 
     private static final String BASE_PATH = "Habit Builder Project/src/use_cases/data_visualization/graphs/";
     private List<JLabel> userGraphLabels;
@@ -15,7 +16,22 @@ public class UserGraphPanel extends JPanel {
         this.userGraphLabels = new ArrayList<>();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         loadUserGraphs(usernames);
+        graphLabel = new JLabel();
+        add(graphLabel);
     }
+    public void updateGraphImage(String imagePath) {
+        // verify that the file exists before trying to update the image
+        File file = new File(imagePath);
+        if (file.exists()) {
+            ImageIcon icon = new ImageIcon(imagePath);
+            graphLabel.setIcon(icon);
+            graphLabel.revalidate();
+            graphLabel.repaint();
+        } else {
+            System.err.println("File does not exist: " + imagePath);
+        }
+    }
+
 
     private void loadUserGraphs(List<String> usernames) {
         for (String username : usernames) {
@@ -29,6 +45,9 @@ public class UserGraphPanel extends JPanel {
             }
         }
     }
+
+
+
 
     private ImageIcon createUserGraphIcon(String username) {
         String path = BASE_PATH + username + "_chart.png";

@@ -23,7 +23,7 @@ public class DateUtils {
 
 
         for (int i = 1; i < 7; i++) {
-            calendar.add(Calendar.DAY_OF_YEAR, -1); // Subtract a day
+            calendar.add(Calendar.DAY_OF_YEAR, -1); // S=subtract a day
             Date previousDay = calendar.getTime();
             last7Days.add(LocalDate.parse(dateFormat.format(previousDay)));
         }
