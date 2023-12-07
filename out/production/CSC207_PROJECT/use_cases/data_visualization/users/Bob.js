@@ -1,1 +1,0 @@
-const Bob_time_spent = [];

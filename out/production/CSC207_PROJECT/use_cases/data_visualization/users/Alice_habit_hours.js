@@ -1,1 +1,0 @@
-const Alice_habit_hours = [40, 20, 3, 0, 0, 0, 0];

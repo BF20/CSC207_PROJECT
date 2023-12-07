@@ -1,1 +1,0 @@
-const Bob_habit_hours = [0, 0, 5329, 0, 0, 0, 0];

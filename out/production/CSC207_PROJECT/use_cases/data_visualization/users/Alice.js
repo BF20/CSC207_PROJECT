@@ -1,1 +1,0 @@
-const Alice_time_spent = [];
