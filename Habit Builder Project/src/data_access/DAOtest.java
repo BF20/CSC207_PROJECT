@@ -20,7 +20,7 @@ public class DAOtest {
 
         // Add a new user called "Charlie"
 
-        User user = userFactory.create("Charile", false, new ArrayList<>());
+        User user = userFactory.create("Charlie", false, new ArrayList<>());
 
         dao.save_user(user);
 
@@ -33,6 +33,12 @@ public class DAOtest {
         user.AddHabit(new_habit);
 
         dao.save_user(user);
+
+        // Test data reading
+
+        System.out.println(dao.get_all_users().get("Bob").GetAllCompletedHabits());
+
+        System.out.println(dao.get_user("Bob"));
 
     }
 }
