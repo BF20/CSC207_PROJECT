@@ -1,7 +1,11 @@
+<<<<<<<< HEAD:Habit Builder Project/src/view/LogHabit/LogHabitPanelView.java
 package view.LogHabit;
+========
+package interface_adapter.log_habit;
+>>>>>>>> origin/benjamin:Habit Builder Project/src/interface_adapter/log_habit/LogHabitPanelView.java
 
 import interface_adapter.log_habit.LogHabitController;
-import view.LogHabit.LogHabitViewModel;
+import view.LogHabitViewModel;
 
 import javax.swing.*;
 import java.awt.*;

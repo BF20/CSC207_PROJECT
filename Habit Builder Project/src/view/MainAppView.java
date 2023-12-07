@@ -1,12 +1,11 @@
 package view;
 
-
 import interface_adapter.GroupGoal.GroupGoalController;
 import use_case.log_habit.LogHabitInteractor;
-
 import interface_adapter.log_habit.LogHabitController;
 import view.LogHabit.LogHabitPanelView;
 import view.LogHabit.LogHabitViewModel;
+
 
 import javax.swing.*;
 import java.awt.*;
